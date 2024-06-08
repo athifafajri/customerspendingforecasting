@@ -107,6 +107,14 @@ def run():
 
          div.st-emotion-cache-1r6slb0 span.st-emotion-cache-10trblm{
             font: bold 24px tahoma;
+         }
+         div [data-testid=stImage]{
+            text-align: center;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+        }
 
         div[data-baseweb=select]>div{
             cursor: pointer;
@@ -285,6 +293,16 @@ def run():
 
                                 predicted_col, score_col = st.columns(2)
 
+                                with predicted_col:
+                                    st.subheader(
+                                        "Expected To Spent")
+                                    st.subheader(
+                                        f"${np.round(predicted_value[0], 2)}")
+
+                                with score_col:
+                                    st.subheader("Model Accuracy")
+                                    st.subheader(f"{np.round(98.27, 2)}%")
+
                 if prediction_option == "From File":
                     st.info("Please upload your file with the following columns' names in the same order\n\
                             [Avg_Session_Length, App_Usage, Website_Usage, Membership_Length]", icon="ℹ️")
@@ -328,6 +346,24 @@ def run():
                             if actual_file is not None and test_file is not None:
                                 y_test = pd.read_csv(actual_file)
                                 if y_test.shape[1] == 1:
+
+                                    col1, col2 = st.columns(2)
+
+                                    with col1:
+                                        test_score = np.round(
+                                            model.score(X_test, y_test) * 100, 2)
+                                        prediction.creat_matrix_score_cards("Prediction Accuracy",
+                                                                            test_score,
+                                                                            True
+                                                                            )
+
+                                    with col2:
+                                        mae = mean_absolute_error(
+                                            y_test, all_predicted_values)
+                                        prediction.creat_matrix_score_cards("Error Ratio",
+                                                                            np.round(
+                                                                                mae, 2),
+                                                                            False)
 
                                     predicted_df = prediction.create_comparison_df(
                                         y_test, all_predicted_values)
