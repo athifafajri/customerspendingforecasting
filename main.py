@@ -107,15 +107,7 @@ def run():
 
          div.st-emotion-cache-1r6slb0 span.st-emotion-cache-10trblm{
             font: bold 24px tahoma;
-         }
-         div [data-testid=stImage]{
-            text-align: center;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 100%;
-        }
-
+            
         div[data-baseweb=select]>div{
             cursor: pointer;
             background-color: #111;
@@ -172,7 +164,6 @@ def run():
 
     with st.sidebar:
         st.title("SPENT MONEY :blue[PREDICTION]")
-        st.image("imgs/money.png", caption="", width=60)
         page = option_menu(
             menu_title=None,
             options=['Home', 'Relations & Correlarions', 'Prediction'],
@@ -295,9 +286,6 @@ def run():
                                 predicted_col, score_col = st.columns(2)
 
                                 with predicted_col:
-                                    st.image("imgs/money-bag.png",
-                                             caption="", width=70)
-
                                     st.subheader(
                                         "Expected To Spent")
                                     st.subheader(
